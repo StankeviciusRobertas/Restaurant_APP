@@ -12,7 +12,7 @@ namespace Restaurant_APP
 
         public Table(int tableNumber)
         {
-            TableNumber = tableNumber;            
+            TableNumber = tableNumber;
         }
     }
 }

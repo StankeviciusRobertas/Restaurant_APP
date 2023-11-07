@@ -7,14 +7,15 @@ using System.Threading.Tasks;
 
 namespace Restaurant_APP
 {
-    public class TableReservation
+    public class TableReservation  
     {
         public List<Table> Tables { get; set; }
         public List<Reservation> Reservations { get; set; }
         public Menu RestaurantMenu { get; set; }
 
         public MenuReader menuReader = new MenuReader();
-
+        public Order newOrder;
+        public Table table;
 
         public TableReservation()
         {
@@ -81,7 +82,8 @@ namespace Restaurant_APP
         {
             if (IsTableReserved(table))
             {
-                Order newOrder = new Order(table);
+                newOrder = new Order(table);
+                this.table = table;
 
                 RestaurantMenu.DisplayMenu();
 
@@ -125,6 +127,12 @@ namespace Restaurant_APP
         public void RemoveTable(Table table)
         {
             Tables.Remove(table);
+        }
+
+        public void ReceiptPrint()
+        {
+            IReceipt receipt = new ReceiptPrinter(this);
+            receipt.ReceiptPrint();
         }
     }
 }

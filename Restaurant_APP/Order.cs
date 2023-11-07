@@ -20,6 +20,11 @@ namespace Restaurant_APP
             OrderDateTime = DateTime.Now;
             TotalPrice = 0;
         }
+
+        public Order()
+        {
+        }
+
         public void AddSelectedMeal(MenuItem selectedMeal)
         {
             SelectedMeals.Add(selectedMeal);

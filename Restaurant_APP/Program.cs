@@ -14,7 +14,7 @@
             int selectedTableNumber;
             string choise = "";
 
-            while (choise != "5")
+            while (choise != "6")
             {
                 Console.Clear();
                 Console.WriteLine("Welcome to the Restaurant APP!");
@@ -23,7 +23,8 @@
                 Console.WriteLine("2. Show reserved tables");
                 Console.WriteLine("3. Show Menu");
                 Console.WriteLine("4. Create order for table");
-                Console.WriteLine("5. Exit");
+                Console.WriteLine("5. Print Receipt");
+                Console.WriteLine("6. Exit");
 
                 choise = Console.ReadLine();
 
@@ -66,7 +67,15 @@
                 }
                 else if (choise == "5")
                 {
+                    tableReservation.ReceiptPrint();
+                }
+                else if (choise == "6")
+                {
                     break;
+                }
+                else
+                {
+                    Console.WriteLine("Your input from the keyboard is not readable, try again!");
                 }
             }
         }
