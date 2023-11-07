@@ -21,7 +21,7 @@ namespace Restaurant_APP
             foreach (var menuItem in MenuItems)
             {
                 Console.WriteLine($"{menuItem}");
-            }
+            }            
         }
     }
 }

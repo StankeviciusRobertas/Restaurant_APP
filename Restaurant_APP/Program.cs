@@ -3,38 +3,72 @@
     public class Program
     {
         static void Main(string[] args)
-        {
-            Console.WriteLine("Welcome to the Restaurant APP!");
-
+        {           
             MenuReader menuReader = new MenuReader();
             List<MenuItem> menuItems = menuReader.ReadMenu();
 
             Menu menu = new Menu(menuItems);
             TableReservation tableReservation = new TableReservation();
 
-            Console.WriteLine("Laisvi stalai:");
-            Console.WriteLine("");
-            tableReservation.DisplayAvailableTables();
+            Table selectedTable;
+            int selectedTableNumber;
+            string choise = "";
 
-            Console.WriteLine("Pasirinkite staliuka, kuriam bus uzsakymas: ");
-            int selectedTableNumber = Convert.ToInt32(Console.ReadLine());
-            Table selectedTable = tableReservation.GetTableByNumber(selectedTableNumber);
-            if (selectedTable != null)
+            while (choise != "5")
             {
-                Console.WriteLine("Iveskite varda: ");
-                string customerName = Console.ReadLine();
-                tableReservation.ReserveTable(selectedTable, customerName);
-            }
-            else
-            {
-                Console.WriteLine($"Staliukas {selectedTableNumber} nerastas.");
-            }
+                Console.Clear();
+                Console.WriteLine("Welcome to the Restaurant APP!");
+                Console.WriteLine("");
+                Console.WriteLine("1. Show avalaible tables");
+                Console.WriteLine("2. Show reserved tables");
+                Console.WriteLine("3. Show Menu");
+                Console.WriteLine("4. Create order for table");
+                Console.WriteLine("5. Exit");
 
-            tableReservation.CreateOrder(selectedTable);
-            Console.WriteLine("");
-            Console.WriteLine("Laisvi staliukai: ");
-            tableReservation.DisplayAvailableTables();
+                choise = Console.ReadLine();
 
+                if (choise == "1")
+                {
+                    Console.Clear();
+                    Console.WriteLine("Available Tables for reservation:");
+                    tableReservation.DisplayAvailableTables();
+                    Console.ReadKey();
+                }
+                else if (choise == "2")
+                {                    
+                    tableReservation.DisplayReservations();
+                }
+                else if (choise == "3")
+                {
+                    menu.DisplayMenu();
+                    Console.ReadKey();
+                }
+                else if (choise == "4")
+                {
+                    Console.Clear();
+                    Console.WriteLine("Available Tables for reservation:");
+                    tableReservation.DisplayAvailableTables();
+                    Console.WriteLine("");
+                    Console.WriteLine("Choise table to create order: ");
+                    selectedTableNumber = Convert.ToInt32(Console.ReadLine());
+                    selectedTable = tableReservation.GetTableByNumber(selectedTableNumber);
+                    if (selectedTable != null)
+                    {
+                        Console.WriteLine("Enter customer name: ");
+                        string customerName = Console.ReadLine();
+                        tableReservation.ReserveTable(selectedTable, customerName);
+                        Console.ReadKey();
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Table {selectedTableNumber} not found.");
+                    }
+                }
+                else if (choise == "5")
+                {
+                    break;
+                }
+            }
         }
     }
 }

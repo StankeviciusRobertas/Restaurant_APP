@@ -44,11 +44,12 @@ namespace Restaurant_APP
             {
                 Console.WriteLine($"Table {reservation.Table.TableNumber} - {reservation.CustomerName}");
             }
+            Console.ReadKey();
         }
 
         
         public void DisplayAvailableTables()
-        {            
+        {
             foreach (var table in Tables)
             {
                 Console.WriteLine($"{table.TableNumber}");
@@ -60,8 +61,10 @@ namespace Restaurant_APP
             {
                 Reservation newReservation = new Reservation(customerName, table);
                 Reservations.Add(newReservation);
+                Console.Clear();
                 Console.WriteLine($"Table {table.TableNumber} reserved for {customerName}");
                 RemoveTable(table);
+                CreateOrder(table);
             }
             else
             {
@@ -82,6 +85,7 @@ namespace Restaurant_APP
 
                 RestaurantMenu.DisplayMenu();
 
+                Console.WriteLine("");
                 Console.WriteLine("Select menu items by entering their MealId (separated by commas): ");
                 string[] selectedMealIds = Console.ReadLine().Split(',');
                 List<MenuItem> menu = menuReader.ReadMenu();
@@ -92,7 +96,7 @@ namespace Restaurant_APP
 
                     if (selectedMeal != null)
                     {
-                        newOrder.SelectedMeals.Add(selectedMeal);
+                        newOrder.AddSelectedMeal(selectedMeal);
                     }
                     else
                     {
@@ -108,8 +112,10 @@ namespace Restaurant_APP
                 Console.WriteLine("Selected meals:");
                 foreach (var meal in newOrder.SelectedMeals)
                 {
-                    Console.WriteLine($"{meal.Name} - {meal.Price}");
+                    Console.WriteLine($"{meal.Name} - {meal.Price}");                    
                 }
+                Console.WriteLine("");
+                Console.WriteLine($"Total price: {newOrder.TotalPrice}");
             }
             else
             {
