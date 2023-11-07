@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Restaurant_APP
 {
     public class ReceiptPrinter : IReceipt
-    {
+    {        
         private readonly TableReservation tableReservation;
 
         public ReceiptPrinter(TableReservation tableReservation)
@@ -16,7 +16,7 @@ namespace Restaurant_APP
         }
 
         public void ReceiptPrint()
-        {
+        {            
             Console.WriteLine("Order Receipt");
             Console.WriteLine($"Table: {tableReservation.table.TableNumber}");
             Console.WriteLine($"Order time: {tableReservation.newOrder.OrderDateTime}");
@@ -27,7 +27,7 @@ namespace Restaurant_APP
             }
             Console.WriteLine("");
             Console.WriteLine($"Total price: {tableReservation.newOrder.TotalPrice}");
-            Console.ReadKey();
+            Console.ReadKey();            
         }
     }
 }

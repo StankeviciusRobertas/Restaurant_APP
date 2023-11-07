@@ -133,6 +133,25 @@ namespace Restaurant_APP
         {
             IReceipt receipt = new ReceiptPrinter(this);
             receipt.ReceiptPrint();
+
+            Reservation reservationToDelete = Reservations.FirstOrDefault(r => r.Table == table);
+            ReservationDelete(reservationToDelete);
+        }
+
+        public void ReservationDelete(Reservation reservation)
+        {
+            Reservations.Remove(reservation);
+            AddTableToAvailable(reservation.Table);
+            Console.WriteLine($"Reservation for table {reservation.Table.TableNumber} deleted.");
+            Thread.Sleep(2000);
+        }
+
+        public void AddTableToAvailable(Table table)
+        {
+            if (!Tables.Contains(table))
+            {
+                Tables.Add(table);
+            }
         }
     }
 }
